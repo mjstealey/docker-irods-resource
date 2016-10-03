@@ -10,7 +10,7 @@ Docker implementation of iRODS Resource Server
 ### Pull image from dockerhub
 
 ```
-docker pull mjstealey/docker-irods-resource:4.1.9
+docker pull mjstealey/docker-irods-resource:latest
 ```
 
 ### Usage:
@@ -24,7 +24,7 @@ $ docker run -d --name icat \
   mjstealey/docker-irods-icat:4.1.8
 ```
 
-When launching our resource server we want to match the version of the iRODS iCAT server, in this example v.4.1.8, and provide a few docker attributes to allow the conainer to bind with the already running iCAT instance. We'll use the **--link** attribute to specify which container it should have IP information for, the **--hostname** attribute to provide a clean name to the created resource, as well as specify the environment variable **IRODS_ICAT_HOST_NAME**.
+When launching our resource server we want to match the version of the iRODS iCAT server, in this example v.4.1.8, and provide a few docker attributes to allow the conainer to bind with the already running iCAT instance. We'll use the **--link** attribute to specify which container it should have IP information for, the **--hostname** attribute to provide a clean name to the created resource, as well as specify the environment variable **IRODS_ICAT_HOST_NAME** to match the hostname we gave to the docker-irods-icat:4.1.8 instance.
 ```
 $ docker run --name resource \
   --hostname resource \
@@ -120,4 +120,4 @@ $ docker run --name resource \
   ```
   
 This call can also be daemonized with the **-d** flag, which would most likely be used in an actual environment.
-From this call you can see the newly launched **resourceResource** from both the **icat** server as well as the **resource** server just as seen in Example 1.
+The outcome of this call would be identical to that described in Example 1, with the same results for the `docker exec -u irods icat iadmin` calls.
