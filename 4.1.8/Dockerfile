@@ -54,8 +54,12 @@ ENV IRODS_ICAT_HOST_NAME=localhost
 ENV IRODS_ICAT_ZONE_NAME=tempZone
 ENV IRODS_ICAT_SERVER_ADMINISTRATOR_PASSWORD=rods
 
-VOLUME ["/var/lib/irods/iRODS/Vault" "/var/lib/postgresql/data"]
-COPY docker-entrypoint.sh /
+# Shenanigans to make dockerhub happy
+COPY . /tmp
+RUN cp /tmp/docker-entrypoint.sh /docker-entrypoint.sh \
+    && rm -rf /tmp/*
+
+VOLUME /var/lib/irods/iRODS/Vault /etc/irods
 
 EXPOSE $IRODS_PORT $IRODS_CONTROL_PLANE_PORT $IRODS_PORT_RANGE_BEGIN-$IRODS_PORT_RANGE_END
 ENTRYPOINT ["/docker-entrypoint.sh"]
