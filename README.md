@@ -1,9 +1,10 @@
 # docker-irods-resource
-Docker implementation of iRODS Resource Server
+Docker implementation of iRODS v.4.1.x Resource Server
 
 ## Supported tags and respective Dockerfile links
 
-- 4.1.9, latest ([4.1.9/Dockerfile](https://github.com/mjstealey/docker-irods-resource/blob/master/4.1.9/Dockerfile))
+- 4.1.10, latest ([4.1.10/Dockerfile](https://github.com/mjstealey/docker-irods-resource/blob/master/4.1.10/Dockerfile))
+- 4.1.9 ([4.1.9/Dockerfile](https://github.com/mjstealey/docker-irods-resource/blob/master/4.1.9/Dockerfile))
 - 4.1.8 ([4.1.8/Dockerfile](https://github.com/mjstealey/docker-irods-resource/blob/master/4.1.8/Dockerfile))
 - 4.1.7 ([4.1.7/Dockerfile](https://github.com/mjstealey/docker-irods-resource/blob/master/4.1.7/Dockerfile))
 
@@ -17,20 +18,20 @@ docker pull mjstealey/docker-irods-resource:latest
 
 **Example 1.** iRODS resource servers assume that there is an already running instance of an iCAT server reachable over the network.
 
-In this example we've previously launched a daemonized instance of [docker-irods-icat:4.1.8](https://github.com/mjstealey/docker-irods-icat) and have specified that both it's docker name and hostname are **icat**:
+In this example we've previously launched a daemonized instance of [docker-irods-icat:latest](https://github.com/mjstealey/docker-irods-icat) and have specified that both it's docker name and hostname are **icat**:
 ```
 $ docker run -d --name icat \
   --hostname icat \
-  mjstealey/docker-irods-icat:4.1.8
+  mjstealey/docker-irods-icat:latest
 ```
 
-When launching our resource server we want to match the version of the iRODS iCAT server, in this example v.4.1.8, and provide a few docker attributes to allow the conainer to bind with the already running iCAT instance. We'll use the **--link** attribute to specify which container it should have IP information for, the **--hostname** attribute to provide a clean name to the created resource, as well as specify the environment variable **IRODS_ICAT_HOST_NAME** to match the hostname we gave to the docker-irods-icat:4.1.8 instance.
+When launching our resource server we want to match the version of the iRODS iCAT server and provide a few docker attributes to allow the conainer to bind with the already running iCAT instance. We'll use the **--link** attribute to specify which container it should have IP information for, the **--hostname** attribute to provide a clean name to the created resource, as well as specify the environment variable **IRODS_ICAT_HOST_NAME** to match the hostname we gave to the docker-irods-icat:latest instance.
 ```
 $ docker run --name resource \
   --hostname resource \
   -e IRODS_ICAT_HOST_NAME=icat \
   --link icat:icat \
-  mjstealey/docker-irods-resource:4.1.8
+  mjstealey/docker-irods-resource:latest
 ```
 This call can also be daemonized with the **-d** flag, which would most likely be used in an actual environment.
 
@@ -97,7 +98,7 @@ $ docker run --name resource \
   --env-file sample-env-file.env \
   --hostname resource \
   --link icat:icat \
-  mjstealey/docker-irods-resource:4.1.8
+  mjstealey/docker-irods-resource:latest
 ```
 - Using sample environment file named `sample-env-file.env` (Update as required for your iRODS installation)
 
