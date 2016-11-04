@@ -1,6 +1,8 @@
 FROM debian:jessie
 MAINTAINER Michael J. Stealey <michael.j.stealey@gmail.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 # explicitly set user/group IDs
 RUN groupadd -r irods --gid=998 \
     && useradd -r -g irods -d /var/lib/irods --uid=998 irods
@@ -58,7 +60,7 @@ ENV IRODS_ICAT_SERVER_ADMINISTRATOR_PASSWORD=rods
 COPY . /tmp
 RUN cp /tmp/docker-entrypoint.sh /docker-entrypoint.sh \
     && rm -rf /tmp/*
-
+ENV DEBIAN_FRONTEND teletype
 VOLUME /var/lib/irods/iRODS/Vault /etc/irods
 
 EXPOSE $IRODS_PORT $IRODS_CONTROL_PLANE_PORT $IRODS_PORT_RANGE_BEGIN-$IRODS_PORT_RANGE_END

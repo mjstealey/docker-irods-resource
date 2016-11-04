@@ -33,8 +33,8 @@ RUN apt-get update && apt-get install -y \
     lsof \
     python-jsonschema
 
-# Install iRODS v.4.1.7
-RUN curl ftp://ftp.renci.org/pub/irods/releases/4.1.7/ubuntu14/irods-resource-4.1.7-ubuntu14-x86_64.deb -o irods-resource.deb \
+# Install iRODS v.4.1.10
+RUN curl ftp://ftp.renci.org/pub/irods/releases/4.1.10/ubuntu14/irods-resource-4.1.10-ubuntu14-x86_64.deb -o irods-resource.deb \
     && sudo dpkg -i irods-resource.deb \
     && sudo apt-get -f install \
     && rm irods-resource.deb
